@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="LogKeeper.Abstractions/LogKeeper.Abstractions.csproj" />
+  <Project Path="LogKeeper.Domain/LogKeeper.Domain.csproj" />
+  <Project Path="LogKeeper.Infrastructure/LogKeeper.Infrastructure.csproj" />
+  <Project Path="LogKeeper.Logic/LogKeeper.Logic.csproj" />
+  <Project Path="LogKeeper/LogKeeper.csproj" />
+</Solution>
