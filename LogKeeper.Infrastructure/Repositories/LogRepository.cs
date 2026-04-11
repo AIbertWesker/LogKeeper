@@ -4,6 +4,7 @@ using LogKeeper.Infrastructure.Options;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Text.Json;
 
 namespace LogKeeper.Infrastructure.Repositories;
 
@@ -23,6 +24,7 @@ internal sealed class LogRepository : ILogRepository
 
     public async Task SaveAsync(LogEntry log)
     {
+        log.Properties = NormalizeProperties(log.Properties);
         await _collection.InsertOneAsync(log);
     }
 
@@ -113,6 +115,56 @@ internal sealed class LogRepository : ILogRepository
         return filterDefinitions.Count == 0
             ? FilterDefinition<LogEntry>.Empty
             : filterBuilder.And(filterDefinitions);
+    }
+
+    private static Dictionary<string, object> NormalizeProperties(Dictionary<string, object>? source)
+    {
+        if (source is null || source.Count == 0)
+        {
+            return [];
+        }
+
+        var normalized = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var (key, value) in source)
+        {
+            normalized[key] = NormalizeValue(value);
+        }
+
+        return normalized;
+    }
+
+    private static object NormalizeValue(object? value)
+    {
+        if (value is null)
+        {
+            return BsonNull.Value;
+        }
+
+        if (value is JsonElement jsonElement)
+        {
+            return NormalizeJsonElement(jsonElement);
+        }
+
+        return value;
+    }
+
+    private static object NormalizeJsonElement(JsonElement element)
+    {
+        return element.ValueKind switch
+        {
+            JsonValueKind.Object => element.EnumerateObject()
+                .ToDictionary(p => p.Name, p => NormalizeJsonElement(p.Value), StringComparer.OrdinalIgnoreCase),
+            JsonValueKind.Array => element.EnumerateArray().Select(NormalizeJsonElement).ToList(),
+            JsonValueKind.String => element.TryGetDateTime(out var dateTime) ? dateTime : element.GetString() ?? string.Empty,
+            JsonValueKind.Number => element.TryGetInt64(out var l) ? l
+                : element.TryGetDecimal(out var d) ? d
+                : element.GetDouble(),
+            JsonValueKind.True => true,
+            JsonValueKind.False => false,
+            JsonValueKind.Null => BsonNull.Value,
+            _ => element.ToString()
+        };
     }
 
 }

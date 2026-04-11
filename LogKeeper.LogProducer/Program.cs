@@ -3,7 +3,7 @@ using Serilog;
 using Serilog.Events;
 
 const string appName = "LogKeeper.LogProducer";
-const string endpoint = "https://localhost:7222/logs";
+const string endpoint = "https://localhost:7290/logs";
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
