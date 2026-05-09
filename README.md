@@ -1,6 +1,6 @@
-# LogKeeper (WIP)
+# LogKeeper
 
-Aplikacja do centralnego zbierania logów z innych aplikacji i zapisywania ich w bazie **NoSQL**. Repozytorium jest w trakcie rozwoju (**Work In Progress**). Projekt realizowany jako **zaliczenie na studiach**.
+Aplikacja do centralnego zbierania logów z innych aplikacji i zapisywania ich w bazie **NoSQL**. Projekt realizowany jako **zaliczenie na studiach**.
 
 ## Cel projektu
 
@@ -37,11 +37,6 @@ Endpoints:
 - `GET /logs/{id}` — szczegóły logu
 - `POST /logs` — zapis logu
 
-## Status
-
-- **WIP** — funkcjonalności i kontrakty API mogą się zmieniać.
-- Celem jest iteracyjne dodawanie endpointów oraz warstwy persystencji (NoSQL) wraz z podstawową walidacją i obsługą błędów.
-
 ## Technologie
 
 - .NET (Minimal API)
@@ -60,7 +55,11 @@ Endpoints:
    - `dotnet run --project LogKeeper.LogProducer`
 5. Swagger UI dostępny w trybie Development
 
-Frontend domyślnie odwołuje się do `https://localhost:7222` — w razie potrzeby zmień to w UI.
+Domyślne adresy (zgodne z `launchSettings.json`):
+- API: `https://localhost:7290` lub `http://localhost:5045`
+- Frontend: `https://localhost:13408` lub `http://localhost:13409`
+
+Frontend ma pole `API base`, gdzie możesz wskazać adres API.
 
 ## Licencja
 
