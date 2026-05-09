@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #1f2937;
+    background: #111827;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.api-config {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+main {
+    padding: 1.5rem 2rem 3rem;
+    display: grid;
+    gap: 2rem;
+}
+
+.filters {
+    background: #111827;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #1f2937;
+}
+
+.filters h2 {
+    margin-top: 0;
+}
+
+.filters .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.filters label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+}
+
+input {
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.35rem;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: inherit;
+}
+
+button {
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.35rem;
+    border: 1px solid #334155;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #1e293b;
+    cursor: not-allowed;
+}
+
+.actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
+.list {
+    background: #111827;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #1f2937;
+}
+
+.list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stats {
+    margin: 0.5rem 0 1rem;
+    color: #94a3b8;
+}
+
+.pagination {
+    display: flex;
+    gap: 0.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.6rem 0.4rem;
+    border-bottom: 1px solid #1f2937;
+    font-size: 0.9rem;
+}
+
+tbody tr:hover {
+    background: #1e293b;
+    cursor: pointer;
+}
+
+.details {
+    background: #111827;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #1f2937;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: #0f172a;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #1f2937;
+}

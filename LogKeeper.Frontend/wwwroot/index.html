@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LogKeeper Viewer</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>LogKeeper Viewer</h1>
+        <div class="api-config">
+            <label for="apiBase">API base</label>
+            <input id="apiBase" type="text" value="https://localhost:7290" />
+            <button id="applyApi">Apply</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="filters">
+            <h2>Filters</h2>
+            <div class="grid">
+                <label>
+                    Level
+                    <input id="level" type="text" placeholder="Info" />
+                </label>
+                <label>
+                    Application
+                    <input id="application" type="text" />
+                </label>
+                <label>
+                    Correlation ID
+                    <input id="correlationId" type="text" />
+                </label>
+                <label>
+                    Client IP
+                    <input id="clientIp" type="text" />
+                </label>
+                <label>
+                    Message contains
+                    <input id="messageContains" type="text" />
+                </label>
+                <label>
+                    From (UTC)
+                    <input id="from" type="datetime-local" />
+                </label>
+                <label>
+                    To (UTC)
+                    <input id="to" type="datetime-local" />
+                </label>
+                <label>
+                    Page size
+                    <input id="pageSize" type="number" min="1" max="200" value="50" />
+                </label>
+            </div>
+            <div class="actions">
+                <button id="applyFilters">Apply filters</button>
+                <button id="refresh">Refresh</button>
+            </div>
+        </section>
+
+        <section class="list">
+            <div class="list-header">
+                <h2>Logs</h2>
+                <div class="pagination">
+                    <button id="prev" disabled>Previous</button>
+                    <button id="next" disabled>Next</button>
+                </div>
+            </div>
+            <div class="stats" id="stats"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Level</th>
+                        <th>Application</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="logRows"></tbody>
+            </table>
+        </section>
+
+        <section class="details" id="details" hidden>
+            <h2>Log details</h2>
+            <pre id="detailsContent"></pre>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

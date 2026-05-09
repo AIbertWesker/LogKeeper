@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "App + Front ",
+    "Projects": [
+      {
+        "Path": "LogKeeper\\LogKeeper.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "LogKeeper.Frontend\\LogKeeper.Frontend.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "LogKeeper.Frontend": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:13408;http://localhost:13409"
+    }
+  }
+}

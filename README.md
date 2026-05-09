@@ -10,19 +10,19 @@ Aplikacja do centralnego zbierania logów z innych aplikacji i zapisywania ich w
 - udostępniać API do przeglądania i filtrowania logów,
 - umożliwiać pobranie szczegółów pojedynczego wpisu (GET by ID).
 
-## Zakres funkcjonalny (planowane)
+## Zakres funkcjonalny
 
 ### 1) Przyjmowanie logów (ingest)
 - Wysyłanie logów do aplikacji pod dedykowany endpoint (HTTP).
-- Docelowo wsparcie typowych metadanych, np. timestamp, poziom logu, źródło/aplikacja, środowisko, correlationId, message, payload/exception.
+- Wsparcie typowych metadanych: timestamp, poziom, aplikacja, correlationId, message, payload/exception.
 
 ### 2) Pobieranie listy logów (z filtrowaniem)
-Endpoint do pobierania listy logów oraz filtrowania po parametrach (przykładowo):
+Endpoint do pobierania listy logów oraz filtrowania po parametrach:
 - zakres czasu (`from`, `to`),
 - poziom (`level`),
-- aplikacja/źródło (`source`),
+- aplikacja/źródło (`application`),
 - correlationId,
-- paginacja i sortowanie.
+- paginacja cursor-based bez `Skip/Take`.
 
 ### 3) Pobieranie szczegółów logu (GET by ID)
 - Endpoint typu „get by id” zwracający kompletny rekord logu wraz ze szczegółami.
@@ -31,26 +31,36 @@ Endpoint do pobierania listy logów oraz filtrowania po parametrach (przykładow
 
 Projekt jest budowany jako **Minimal API** (tzw. „mini API”) w .NET.
 
-Dodatkowo dostępny jest prosty endpoint:
-- `GET /health` — health check aplikacji.
+Endpoints:
+- `GET /health` — health check
+- `GET /logs` — lista logów z filtrami i paginacją
+- `GET /logs/{id}` — szczegóły logu
+- `POST /logs` — zapis logu
 
 ## Status
 
 - **WIP** — funkcjonalności i kontrakty API mogą się zmieniać.
 - Celem jest iteracyjne dodawanie endpointów oraz warstwy persystencji (NoSQL) wraz z podstawową walidacją i obsługą błędów.
 
-## Technologie (wstępnie)
+## Technologie
 
 - .NET (Minimal API)
 - OpenAPI / Swagger
-- Docelowo: baza NoSQL (do ustalenia/implementacji w trakcie)
+- MongoDB (NoSQL)
+- Serilog (producent logów)
 
 ## Uruchomienie (dev)
 
 1. Sklonuj repozytorium
-2. Uruchom projekt z Visual Studio lub przez CLI:
-   - `dotnet run`
-3. Swagger UI dostępny w trybie Development
+2. Uruchom API:
+   - `dotnet run --project LogKeeper`
+3. Uruchom frontend (statyczny hosting):
+   - `dotnet run --project LogKeeper.Frontend`
+4. (Opcjonalnie) uruchom producenta logów:
+   - `dotnet run --project LogKeeper.LogProducer`
+5. Swagger UI dostępny w trybie Development
+
+Frontend domyślnie odwołuje się do `https://localhost:7222` — w razie potrzeby zmień to w UI.
 
 ## Licencja
 

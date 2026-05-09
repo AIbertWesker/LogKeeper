@@ -14,6 +14,15 @@ public class Program
         builder.Services.AddOpenApi();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("Frontend", policy =>
+            {
+                policy.SetIsOriginAllowed(_ => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+        });
 
         builder.Services.AddLogic();
         builder.Services.AddInfrastructure(builder.Configuration);
@@ -28,6 +37,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseCors("Frontend");
         app.UseHttpsRedirection();
 
         app.MapGet("/health", () => Results.Ok(new { status = "ok" }))
